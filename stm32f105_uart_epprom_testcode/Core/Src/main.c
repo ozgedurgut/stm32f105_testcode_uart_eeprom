@@ -176,15 +176,18 @@ int main(void)
 		sendData("77777777");
 		HAL_Delay(1000);
 		sendData("22222222");
+		dataWrite[0]=1;
+		dataWrite[1]=2;
+		dataWrite[2]=3;
+		dataWrite[3]=4;
+		HAL_I2C_Mem_Write(&hi2c2, DEV_ADDR, 0, 8, dataWrite, 4, 20);
+		HAL_Delay(1000);
 
 		if(flag == 0){
 			HAL_Delay(100);
 			HAL_I2C_Mem_Read(&hi2c2, DEV_ADDR, 0, 8, dataRead, 4, 20);
 			HAL_Delay(100);
-			cleanMode=dataRead[0];
-			waitMode=dataRead[1];
-			iceCreamMode=dataRead[2];
-			heatMode=dataRead[3];
+
 			flag = 1;
 		}
 	}
